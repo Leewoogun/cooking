@@ -4,19 +4,6 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.lwg.cooking.buildlogic"
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
-
 dependencies {
     implementation(libs.android.gradlePlugin)
     implementation(libs.kotlin.gradlePlugin)
@@ -25,7 +12,6 @@ dependencies {
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.detekt.gradlePlugin)
 }
-
 
 gradlePlugin {
     plugins {

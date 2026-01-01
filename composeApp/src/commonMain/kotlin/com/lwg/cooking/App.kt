@@ -18,6 +18,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import cooking.composeapp.generated.resources.Res
 import cooking.composeapp.generated.resources.compose_multiplatform
+import org.koin.core.KoinApplication
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.module
 
 @Composable
 @Preview
@@ -46,4 +50,15 @@ fun App() {
             }
         }
     }
+}
+internal val appModule = module {
+
+}
+
+
+internal fun cookingAppDeclaration(
+    additionalDeclaration: KoinApplication.() -> Unit = {},
+): KoinAppDeclaration = {
+    modules(appModule)
+    additionalDeclaration()
 }

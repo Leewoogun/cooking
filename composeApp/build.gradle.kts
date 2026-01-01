@@ -4,14 +4,11 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeHotReload)
-    id("cooking.kotlin.multiplatform")
-    id("cooking.compose.multiplatform")
-    id("cooking.kmp.ios")
-    id("cooking.kmp.android")
+    alias(libs.plugins.cookingKotlinMultiplatform)
+    alias(libs.plugins.cookingComposeMultiplatform)
 }
 
 kotlin {
-    // iOS Framework 설정
     targets
         .filterIsInstance<KotlinNativeTarget>()
         .forEach { target ->
@@ -31,11 +28,13 @@ kotlin {
 
         commonMain.dependencies {
             implementation(libs.androidx.lifecycle.runtime.compose)
+
+            implementation(libs.koin.compose.viewmodel.navigation)
         }
     }
 }
 
-// Compose Hot Reload 최적화
+// Enable Compose Hot Reload optimization
 // https://github.com/JetBrains/compose-hot-reload?tab=readme-ov-file#optimization-enable-optimizenonskippinggroups-not-required
 composeCompiler {
     featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
@@ -50,7 +49,7 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
     }
 
     buildTypes {
