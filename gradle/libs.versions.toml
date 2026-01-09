@@ -152,3 +152,4 @@ cookingVerifyDetekt = { id = "cooking.verify.detekt" }
 cookingKotlinMultiplatform = { id = "cooking.kotlin.multiplatform" }
 cookingComposeMultiplatform = { id = "cooking.compose.multiplatform" }
 cookingFeature = { id = "cooking.feature" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
