@@ -3,6 +3,7 @@ package com.lwg.cooking.designsystem.theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -15,6 +16,10 @@ import cooking.core.designsystem.generated.resources.GmarketSansTTFLight
 import cooking.core.designsystem.generated.resources.GmarketSansTTFMedium
 import cooking.core.designsystem.generated.resources.Res
 import org.jetbrains.compose.resources.Font
+
+val LocalTypography = staticCompositionLocalOf<CookingTypoGraphy> {
+    error("CookingTypoGraphy를 provide 해야합니다.")
+}
 
 val TextUnit.nonScaledSp
     @Composable
