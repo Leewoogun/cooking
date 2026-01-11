@@ -2,6 +2,7 @@ package com.lwg.cooking.designsystem.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 val LocalColorScheme = staticCompositionLocalOf { CookingColorScheme.lightColorScheme }
@@ -27,6 +28,13 @@ val FontBlack = Color(0xFF32221B)
 val Brown1 = Color(0xFF93796C)
 val Brown2 = Color(0xFF53392D)
 
+val GradientColor = Brush.horizontalGradient(
+    colors = listOf(
+        Orange1,
+        Orange2
+    )
+)
+
 @Immutable
 data class CookingColorScheme(
     val orange1: Color,
@@ -41,6 +49,7 @@ data class CookingColorScheme(
     val fontBlack: Color,
     val brown1: Color,
     val brown2: Color,
+    val gradientColor: Brush
 ) {
     companion object {
         val lightColorScheme = CookingColorScheme(
@@ -56,6 +65,7 @@ data class CookingColorScheme(
             fontBlack = FontBlack,
             brown1 = Brown1,
             brown2 = Brown2,
+            gradientColor = GradientColor
         )
     }
 }

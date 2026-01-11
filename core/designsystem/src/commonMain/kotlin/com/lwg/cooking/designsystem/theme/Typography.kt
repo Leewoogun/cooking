@@ -69,6 +69,10 @@ data class CookingTypoGraphy(
     val light16: TextStyle,
     val medium16: TextStyle,
     val bold16: TextStyle,
+
+    val light14: TextStyle,
+    val medium14: TextStyle,
+    val bold14: TextStyle,
 )
 
 @Composable
@@ -140,6 +144,21 @@ fun createTypography(): CookingTypoGraphy {
         bold16 = baseStyle.copy(
             fontSize = 16.sp,
             lineHeight = 24.sp,
+            fontWeight = FontWeight.Bold,
+        ),
+        light14 = baseStyle.copy(
+            fontSize = 14.sp,
+            lineHeight = 22.sp,
+            fontWeight = FontWeight.Light,
+        ),
+        medium14 = baseStyle.copy(
+            fontSize = 14.sp,
+            lineHeight = 22.sp,
+            fontWeight = FontWeight.Medium,
+        ),
+        bold14 = baseStyle.copy(
+            fontSize = 14.sp,
+            lineHeight = 22.sp,
             fontWeight = FontWeight.Bold,
         ),
     )
