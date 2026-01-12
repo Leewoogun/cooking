@@ -7,6 +7,7 @@ plugins {
 dependencies {
     implementation(libs.android.gradlePlugin)
     implementation(libs.kotlin.gradlePlugin)
+    implementation(libs.ksp.gradlePlugin)
     implementation(libs.roborazzi.gradle.plugin)
     compileOnly(libs.compose.compiler.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
