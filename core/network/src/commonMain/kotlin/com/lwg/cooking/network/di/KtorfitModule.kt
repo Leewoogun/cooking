@@ -8,47 +8,43 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import org.koin.dsl.module
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
 
-/**
- * Ktorfit 기본 설정 모듈
- * - Json 직렬화 설정
- * - HttpClient 설정
- * - Ktorfit 인스턴스 제공
- */
-val ktorfitModule = module {
-    single { provideJson() }
-    single { provideHttpClient(get()) }
-    single { provideKtorfit(get()) }
-}
+@Module
+class KtorfitModule {
 
-private fun provideJson(): Json = Json {
-    ignoreUnknownKeys = true
-    isLenient = true
-    encodeDefaults = true
-    prettyPrint = true
-}
+    @Single
+    fun provideJson(): Json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+        encodeDefaults = true
+        prettyPrint = true
+    }
 
-private fun provideHttpClient(json: Json): HttpClient {
-    return HttpClient {
-        install(ContentNegotiation) {
-            json(json)
-        }
-
-        install(Logging) {
-            logger = object : Logger {
-                override fun log(message: String) {
-                    println("HTTP Client: $message")
-                }
+    @Single
+    fun provideHttpClient(json: Json): HttpClient {
+        return HttpClient {
+            install(ContentNegotiation) {
+                json(json)
             }
-            level = LogLevel.ALL
+
+            install(Logging) {
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        println("HTTP Client: $message")
+                    }
+                }
+                level = LogLevel.ALL
+            }
         }
     }
-}
 
-private fun provideKtorfit(httpClient: HttpClient): Ktorfit {
-    return Ktorfit.Builder()
-        .httpClient(httpClient)
-        .baseUrl("https://api.example.com/") // TODO: 실제 API URL로 변경
-        .build()
+    @Single
+    fun provideKtorfit(httpClient: HttpClient): Ktorfit {
+        return Ktorfit.Builder()
+            .httpClient(httpClient)
+            .baseUrl("https://api.example.com/") // TODO: 실제 API URL로 변경
+            .build()
+    }
 }

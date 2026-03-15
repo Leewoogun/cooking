@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.cookingKotlinMultiplatform)
     alias(libs.plugins.cookingComposeMultiplatform)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -30,6 +31,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
 
             implementation(libs.koin.compose.viewmodel.navigation)
+            implementation(libs.koin.annotations)
+
+            implementation(projects.core.data)
         }
     }
 }
@@ -64,7 +68,27 @@ android {
     }
 }
 
+// KSP 생성 코드를 commonMain에 포함
+kotlin.sourceSets.commonMain {
+    kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+}
+
 dependencies {
     debugImplementation(compose.uiTooling)
+
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+    add("kspAndroid", libs.koin.ksp.compiler)
+    add("kspIosX64", libs.koin.ksp.compiler)
+    add("kspIosArm64", libs.koin.ksp.compiler)
+    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+}
+
+// KMP + KSP 태스크 의존성 workaround
+project.tasks.configureEach {
+    if (name != "kspCommonMainKotlinMetadata" &&
+        (name.startsWith("ksp") || name.startsWith("compile"))
+    ) {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }
 

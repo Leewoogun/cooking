@@ -30,11 +30,17 @@ kotlin {
 
             // Koin
             implementation(libs.koin.core)
+            implementation(libs.koin.annotations)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
     }
+}
+
+// KSP 생성 코드를 commonMain에 포함
+kotlin.sourceSets.commonMain {
+    kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
 }
 
 dependencies {
@@ -43,4 +49,20 @@ dependencies {
     add("kspIosX64", libs.ktorfit.ksp)
     add("kspIosArm64", libs.ktorfit.ksp)
     add("kspIosSimulatorArm64", libs.ktorfit.ksp)
+
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+    add("kspAndroid", libs.koin.ksp.compiler)
+    add("kspIosX64", libs.koin.ksp.compiler)
+    add("kspIosArm64", libs.koin.ksp.compiler)
+    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+}
+
+// KMP + KSP 태스크 의존성 workaround
+// https://github.com/google/ksp/issues/567
+project.tasks.configureEach {
+    if (name != "kspCommonMainKotlinMetadata" &&
+        (name.startsWith("ksp") || name.startsWith("compile"))
+    ) {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }

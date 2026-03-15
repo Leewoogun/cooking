@@ -1,23 +1,13 @@
 package com.lwg.cooking.data.di
 
-import com.lwg.cooking.data.repository.RecipeRepositoryImpl
-import com.lwg.cooking.domain.repository.RecipeRepository
-import org.koin.core.module.dsl.bind
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
 /**
  * Repository 계층을 제공하는 Koin 모듈
  *
- * 구조:
- * - Domain 모듈: Repository 인터페이스 정의
- * - Data 모듈: Repository 구현체 (Network API 사용)
+ * @ComponentScan으로 data.repository 패키지 내의 @Single 어노테이션을 자동 스캔합니다.
  */
-val repositoryModule = module {
-    // RecipeRepository
-    singleOf(::RecipeRepositoryImpl) { bind<RecipeRepository>() }
-
-    // 추가 Repository 예시:
-    // singleOf(::UserRepositoryImpl) { bind<UserRepository>() }
-    // singleOf(::AuthRepositoryImpl) { bind<AuthRepository>() }
-}
+@Module
+@ComponentScan("com.lwg.cooking.data.repository")
+class RepositoryModule

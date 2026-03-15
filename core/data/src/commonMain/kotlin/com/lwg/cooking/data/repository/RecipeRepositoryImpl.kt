@@ -2,6 +2,7 @@ package com.lwg.cooking.data.repository
 
 import com.lwg.cooking.domain.repository.RecipeRepository
 import com.lwg.cooking.network.api.RecipeApi
+import org.koin.core.annotation.Single
 
 /**
  * RecipeRepository의 실제 구현체
@@ -13,6 +14,7 @@ import com.lwg.cooking.network.api.RecipeApi
  *
  * @param recipeApi Network 모듈에서 제공하는 RecipeApi 주입
  */
+@Single(binds = [RecipeRepository::class])
 class RecipeRepositoryImpl(
     private val recipeApi: RecipeApi
 ) : RecipeRepository {
