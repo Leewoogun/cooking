@@ -32,6 +32,10 @@ gradlePlugin {
             id = "cooking.verify.detekt"
             implementationClass = "com.lwg.cooking.primitive.DetektPlugin"
         }
+        register("kspKoin") {
+            id = "cooking.ksp.koin"
+            implementationClass = "com.lwg.cooking.primitive.KspKoinPlugin"
+        }
         register("kmpConvention") {
             id = "cooking.kotlin.multiplatform"
             implementationClass = "com.lwg.cooking.convention.KotlinMultiPlatformConventionPlugin"
