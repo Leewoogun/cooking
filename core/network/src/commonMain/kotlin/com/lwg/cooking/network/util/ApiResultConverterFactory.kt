@@ -6,7 +6,6 @@ import de.jensklingenberg.ktorfit.converter.KtorfitResult
 import de.jensklingenberg.ktorfit.converter.TypeData
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
-import io.ktor.utils.io.errors.IOException
 
 /**
  * Ktorfit Converter Factory for ApiResult
@@ -37,12 +36,13 @@ class ApiResultConverterFactory : Converter.Factory {
                                 ApiResult.Success(body)
                             } else {
                                 ApiResult.Failure.HttpError(
-                                    statusCode = response.status.value,
-                                    statusMessage = response.status.description,
+                                    status_code = response.status.value,
+                                    status_message = response.status.description,
+                                    success = false,
                                 )
                             }
                         } catch (e: Exception) {
-                            ApiResult.Failure.UnknownError(e)
+                            ApiResult.Failure.UnknownApiError(e)
                         }
                     }
 
@@ -51,7 +51,7 @@ class ApiResultConverterFactory : Converter.Factory {
                         if (throwable is kotlinx.io.IOException) {
                             ApiResult.Failure.NetworkError
                         } else {
-                            ApiResult.Failure.UnknownError(throwable)
+                            ApiResult.Failure.UnknownApiError(throwable)
                         }
                     }
                 }

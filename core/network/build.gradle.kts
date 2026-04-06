@@ -23,6 +23,7 @@ buildkonfig {
 
     defaultConfigs {
         buildConfigField(STRING, "TMDB_TOKEN", properties["tmdb_token"].toString().trim('"'))
+        buildConfigField(STRING, "BASE_URL", "https://api.themoviedb.org/3/")
     }
 }
 

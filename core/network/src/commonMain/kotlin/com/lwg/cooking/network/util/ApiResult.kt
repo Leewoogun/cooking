@@ -9,13 +9,20 @@ sealed interface ApiResult<out T> {
 
     sealed interface Failure : ApiResult<Nothing> {
         data class HttpError(
-            val statusCode: Int,
-            val statusMessage: String,
+            val status_code: Int,
+            val status_message: String,
+            val success: Boolean,
+        ) : Failure
+
+        data class CustomError(
+            val status_code: Int,
+            val status_message: String,
+            val success: Boolean,
         ) : Failure
 
         data object NetworkError : Failure
 
-        data class UnknownError(val throwable: Throwable) : Failure
+        data class UnknownApiError(val throwable: Throwable) : Failure
     }
 }
 
@@ -71,15 +78,42 @@ inline fun <T> ApiResult<T>.onFailureWithErrorHandling(
     if (this is ApiResult.Failure) {
         when (this) {
             is ApiResult.Failure.HttpError -> {
-                onError(statusMessage)
+                onError(status_message)
             }
 
             ApiResult.Failure.NetworkError -> {
                 onError("네트워크 오류가 발생하였습니다. 네트워크를 확인하여 주세요.")
             }
 
-            is ApiResult.Failure.UnknownError -> {
-                onError(throwable.message ?: "알 수 없는 오류가 발생하였습니다.")
+            is ApiResult.Failure.UnknownApiError -> {}
+
+            is ApiResult.Failure.CustomError -> {
+                onError(status_message)
+            }
+        }
+    }
+    return this
+}
+
+@OptIn(ExperimentalContracts::class)
+inline fun <T> ApiResult<T>.suspendOnFailureWithErrorHandling(
+    crossinline onError: (String) -> Unit = {},
+): ApiResult<T> {
+    contract { callsInPlace(onError, InvocationKind.AT_MOST_ONCE) }
+    if (this is ApiResult.Failure) {
+        when (this) {
+            is ApiResult.Failure.HttpError -> {
+                onError(status_message)
+            }
+
+            ApiResult.Failure.NetworkError -> {
+                onError("네트워크 오류가 발생하였습니다. 네트워크를 확인하여 주세요.")
+            }
+
+            is ApiResult.Failure.UnknownApiError -> {}
+
+            is ApiResult.Failure.CustomError -> {
+                onError(status_message)
             }
         }
     }

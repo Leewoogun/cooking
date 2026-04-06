@@ -34,6 +34,7 @@ kotlin {
             implementation(libs.koin.annotations)
 
             implementation(projects.core.data)
+            implementation(projects.core.domain)
         }
     }
 }

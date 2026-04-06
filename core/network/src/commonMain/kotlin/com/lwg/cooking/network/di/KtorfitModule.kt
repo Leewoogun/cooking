@@ -53,7 +53,7 @@ class KtorfitModule {
     fun provideKtorfit(httpClient: HttpClient): Ktorfit {
         return Ktorfit.Builder()
             .httpClient(httpClient)
-            .baseUrl("https://api.themoviedb.org/3/") // TODO: 실제 API URL로 변경
+            .baseUrl(BuildKonfig.BASE_URL)
             .converterFactories(ApiResultConverterFactory())
             .build()
     }
