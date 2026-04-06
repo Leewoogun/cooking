@@ -1,12 +1,15 @@
 package com.lwg.cooking.network.di
 
+import com.lwg.cooking.network.BuildKonfig
 import com.lwg.cooking.network.util.ApiResultConverterFactory
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.Module
@@ -30,6 +33,11 @@ class KtorfitModule {
                 json(json)
             }
 
+            install(DefaultRequest) {
+                header("Content-Type", "application/json; charset=utf-8")
+                header("Authorization", "Bearer ${BuildKonfig.TMDB_TOKEN}")
+            }
+
             install(Logging) {
                 logger = object : Logger {
                     override fun log(message: String) {
@@ -45,7 +53,7 @@ class KtorfitModule {
     fun provideKtorfit(httpClient: HttpClient): Ktorfit {
         return Ktorfit.Builder()
             .httpClient(httpClient)
-            .baseUrl("https://api.example.com/") // TODO: 실제 API URL로 변경
+            .baseUrl("https://api.themoviedb.org/3/") // TODO: 실제 API URL로 변경
             .converterFactories(ApiResultConverterFactory())
             .build()
     }

@@ -1,13 +1,29 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.cookingKotlinMultiplatform)
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.cookingKspKoin)
     alias(libs.plugins.ktorfit)
+    alias(libs.plugins.buildkonfig)
 }
 
 android {
     namespace = "com.lwg.cooking.network"
+}
+
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}
+
+buildkonfig {
+    packageName = "com.lwg.cooking.network"
+
+    defaultConfigs {
+        buildConfigField(STRING, "TMDB_TOKEN", properties["tmdb_token"].toString().trim('"'))
+    }
 }
 
 kotlin {
