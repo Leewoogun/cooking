@@ -1,5 +1,6 @@
 package com.lwg.cooking.network.di
 
+import com.lwg.cooking.network.util.ApiResultConverterFactory
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -45,6 +46,7 @@ class KtorfitModule {
         return Ktorfit.Builder()
             .httpClient(httpClient)
             .baseUrl("https://api.example.com/") // TODO: 실제 API URL로 변경
+            .converterFactories(ApiResultConverterFactory())
             .build()
     }
 }
