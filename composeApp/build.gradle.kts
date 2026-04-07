@@ -27,7 +27,10 @@ kotlin {
         }
 
         commonMain.dependencies {
+            implementation(compose.materialIconsExtended)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.androidx.navigation3.ui)
+            implementation(libs.androidx.lifecycle.viewmodel.navigation3)
 
             implementation(libs.koin.compose.viewmodel.navigation)
             implementation(libs.koin.annotations)
@@ -35,6 +38,13 @@ kotlin {
             implementation(projects.core.data)
             implementation(projects.core.domain)
             implementation(projects.core.utils)
+            implementation(projects.core.navigation)
+            implementation(projects.core.designsystem)
+
+            implementation(projects.feature.home)
+            implementation(projects.feature.ex1)
+            implementation(projects.feature.ex2)
+            implementation(projects.feature.ex3)
         }
     }
 }

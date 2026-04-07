@@ -17,9 +17,6 @@ class KotlinMultiPlatformiOSPlugin : Plugin<Project> {
             // iOS Simulator (M1+ Mac)
             iosSimulatorArm64()
 
-            // iOS Simulator (Intel Mac)
-            iosX64()
-
             targets.withType<KotlinNativeTarget> {
                 compilations["main"].compileTaskProvider.configure {
                     compilerOptions {

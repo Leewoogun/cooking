@@ -24,7 +24,6 @@ class KspKoinPlugin : Plugin<Project> {
         val kspTargets = listOf(
             "kspCommonMainMetadata",
             "kspAndroid",
-            "kspIosX64",
             "kspIosArm64",
             "kspIosSimulatorArm64",
         )
