@@ -37,7 +37,7 @@ robolectric = "4.14.1"
 roborazzi = "1.43.1"
 composablePreviewScanner = "0.6.1"
 buildkonfig = "0.15.2"
-napier = "2.7.1"
+kermit = "2.0.5"
 moko-resources = "0.24.3"
 
 
@@ -131,8 +131,8 @@ roborazzi-gradle-plugin = { group = "io.github.takahirom.roborazzi", name = "rob
 aboutlibraries-compose-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutlibrariesCore" }
 aboutlibraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutlibrariesCore" }
 
-# Napier
-napier = { group = "io.github.aakira", name = "napier", version.ref = "napier" }
+# Kermit
+kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 
 # MOKO Resources
 moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref = "moko-resources" }

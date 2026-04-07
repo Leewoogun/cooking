@@ -3,6 +3,7 @@ package com.lwg.cooking
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lwg.cooking.domain.repository.MovieRepository
+import com.lwg.cooking.utils.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -25,6 +26,7 @@ class MovieViewModel(
     }
 
     private fun loadMovies() {
+        Logger.i("로그입니다")
         viewModelScope.launch {
             movieRepository.getTopRatedMovies { errorMessage ->
                 _error.value = errorMessage
