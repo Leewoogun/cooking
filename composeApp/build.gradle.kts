@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.composeHotReload)
     alias(libs.plugins.cookingKotlinMultiplatform)
     alias(libs.plugins.cookingComposeMultiplatform)
     alias(libs.plugins.cookingKspKoin)
@@ -40,8 +39,6 @@ kotlin {
     }
 }
 
-// Enable Compose Hot Reload optimization
-// https://github.com/JetBrains/compose-hot-reload?tab=readme-ov-file#optimization-enable-optimizenonskippinggroups-not-required
 composeCompiler {
     featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
 }
