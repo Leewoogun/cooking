@@ -2,13 +2,11 @@ package com.lwg.cooking.network.di
 
 import com.lwg.cooking.network.BuildKonfig
 import com.lwg.cooking.network.util.ApiResultConverterFactory
+import com.lwg.cooking.network.util.HttpNetworkLogger
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logger
-import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -38,14 +36,7 @@ class KtorfitModule {
                 header("Authorization", "Bearer ${BuildKonfig.TMDB_TOKEN}")
             }
 
-            install(Logging) {
-                logger = object : Logger {
-                    override fun log(message: String) {
-                        println("HTTP Client: $message")
-                    }
-                }
-                level = LogLevel.ALL
-            }
+            install(HttpNetworkLogger)
         }
     }
 

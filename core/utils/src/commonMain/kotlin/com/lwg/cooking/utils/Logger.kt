@@ -32,4 +32,8 @@ object Logger {
     fun e(message: String, throwable: Throwable? = null) {
         KermitLogger.e(throwable) { message }
     }
+
+    fun v(message: String) {
+        KermitLogger.v { message }
+    }
 }
