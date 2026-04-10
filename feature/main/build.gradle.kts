@@ -1,0 +1,20 @@
+plugins {
+    alias(libs.plugins.cookingFeature)
+}
+
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.materialIconsExtended)
+
+            implementation(projects.feature.home)
+            implementation(projects.feature.ex1)
+            implementation(projects.feature.ex2)
+            implementation(projects.feature.ex3)
+        }
+    }
+}
+
+android {
+    namespace = "com.lwg.cooking.feature.main"
+}

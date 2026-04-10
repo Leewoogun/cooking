@@ -1,4 +1,4 @@
-package com.lwg.cooking.navigation
+package com.lwg.cooking.feature.main.component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -6,8 +6,9 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.lwg.cooking.navigation.Route
 
-enum class TopLevelDestination(
+enum class BottomNavItem(
     val route: Route,
     val icon: ImageVector,
     val label: String,

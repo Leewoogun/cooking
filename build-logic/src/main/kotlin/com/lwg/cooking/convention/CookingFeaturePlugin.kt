@@ -30,6 +30,7 @@ class CookingFeaturePlugin : Plugin<Project> {
                         implementation(libs.library("androidx-lifecycle-viewmodel-navigation3"))
                         implementation(libs.library("androidx-lifecycle-runtime-compose"))
                         implementation(libs.library("koin-compose-viewmodel-navigation"))
+                        implementation(libs.library("koin-annotations"))
                     }
                 }
             }
