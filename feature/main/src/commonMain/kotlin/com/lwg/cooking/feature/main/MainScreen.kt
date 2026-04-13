@@ -2,59 +2,82 @@ package com.lwg.cooking.feature.main
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import androidx.savedstate.serialization.SavedStateConfiguration
 import com.lwg.cooking.designsystem.theme.CookingTheme
 import com.lwg.cooking.feature.ex1.Ex1Route
 import com.lwg.cooking.feature.ex2.Ex2Route
 import com.lwg.cooking.feature.ex3.Ex3Route
 import com.lwg.cooking.feature.home.HomeRoute
-import com.lwg.cooking.feature.main.component.BottomNavItem
+import com.lwg.cooking.feature.main.component.CookingBottomBar
+import com.lwg.cooking.navigation.LocalMainAction
+import com.lwg.cooking.navigation.LocalNavigateAction
+import com.lwg.cooking.navigation.MainAction
 import com.lwg.cooking.navigation.Route
+import com.lwg.cooking.navigation.routeSerializersModule
+import kotlinx.coroutines.launch
 
-@Composable
-fun MainRoute() {
-    MainScreen()
+private val savedStateConfiguration = SavedStateConfiguration {
+    serializersModule = routeSerializersModule
 }
 
 @Composable
-private fun MainScreen() {
-    CookingTheme {
-        val backStack = remember { mutableStateListOf<Route>(Route.HomeRoute.Main) }
-        val currentRoute = backStack.lastOrNull()
+fun MainRoute(
+    onFinishApp: () -> Unit = {},
+) {
+    val backStack = rememberNavBackStack(savedStateConfiguration, Route.HomeRoute.Main)
+    val navigator = remember(backStack) { MainNavigator(backStack) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+    var backPressedOnce by remember { mutableStateOf(false) }
 
-        Scaffold(
-            bottomBar = {
-                CookingBottomBar(
-                    currentRoute = currentRoute,
-                    onTabSelected = { route ->
-                        backStack.clear()
-                        backStack.add(route)
-                    },
-                )
-            },
-        ) { innerPadding ->
-            NavDisplay(
+    val mainAction = remember(snackbarHostState, scope) {
+        object : MainAction {
+            override fun showSnackBar(message: String) {
+                scope.launch {
+                    snackbarHostState.showSnackbar(message)
+                }
+            }
+
+            override fun finishApp() {
+                onFinishApp()
+            }
+        }
+    }
+
+    CookingTheme {
+        CompositionLocalProvider(
+            LocalNavigateAction provides navigator,
+            LocalMainAction provides mainAction,
+        ) {
+            MainScreen(
                 backStack = backStack,
-                onBack = { backStack.removeAt(backStack.lastIndex) },
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
-                entryProvider = { route ->
-                    when (route) {
-                        is Route.HomeRoute -> NavEntry(route) { HomeRoute() }
-                        is Route.Ex1Route -> NavEntry(route) { Ex1Route() }
-                        is Route.Ex2Route -> NavEntry(route) { Ex2Route() }
-                        is Route.Ex3Route -> NavEntry(route) { Ex3Route() }
+                navigator = navigator,
+                snackbarHostState = snackbarHostState,
+                onBackPressed = {
+                    if (backPressedOnce) {
+                        mainAction.finishApp()
+                    } else {
+                        backPressedOnce = true
+                        scope.launch {
+                            snackbarHostState.showSnackbar("뒤로 버튼을 한번 더 누르면 종료됩니다.")
+                            backPressedOnce = false
+                        }
                     }
                 },
             )
@@ -63,29 +86,49 @@ private fun MainScreen() {
 }
 
 @Composable
-private fun CookingBottomBar(
-    currentRoute: Route?,
-    onTabSelected: (Route) -> Unit,
+private fun MainScreen(
+    backStack: NavBackStack<NavKey>,
+    navigator: MainNavigator,
+    snackbarHostState: SnackbarHostState,
+    onBackPressed: () -> Unit,
 ) {
-    NavigationBar {
-        BottomNavItem.entries.forEach { destination ->
-            NavigationBarItem(
-                selected = when (currentRoute) {
-                    is Route.HomeRoute -> destination == BottomNavItem.HOME
-                    is Route.Ex1Route -> destination == BottomNavItem.EX1
-                    is Route.Ex2Route -> destination == BottomNavItem.EX2
-                    is Route.Ex3Route -> destination == BottomNavItem.EX3
-                    else -> false
-                },
-                onClick = { onTabSelected(destination.route) },
-                icon = {
-                    Icon(
-                        imageVector = destination.icon,
-                        contentDescription = destination.label,
-                    )
-                },
-                label = { Text(text = destination.label) },
+    val currentRoute = backStack.lastOrNull()
+
+    PlatformBackHandler(enabled = backStack.size <= 1) {
+        onBackPressed()
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        bottomBar = {
+            CookingBottomBar(
+                currentRoute = currentRoute,
+                onTabSelected = navigator::switchTab,
             )
-        }
+        },
+    ) { innerPadding ->
+        NavDisplay(
+            backStack = backStack,
+            onBack = {
+                if (backStack.size > 1) {
+                    navigator.popBackStack()
+                } else {
+                    onBackPressed()
+                }
+            },
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            entryProvider = { route ->
+                when (route) {
+                    is Route.HomeRoute -> NavEntry(route) { HomeRoute() }
+                    is Route.Ex1Route -> NavEntry(route) { Ex1Route() }
+                    is Route.Ex2Route -> NavEntry(route) { Ex2Route() }
+                    is Route.Ex3Route -> NavEntry(route) { Ex3Route() }
+                    else -> NavEntry(route) {}
+                }
+            },
+        )
     }
 }
+

@@ -1,8 +1,12 @@
 package com.lwg.cooking.navigation
 
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
 
-sealed interface Route {
+sealed interface Route : NavKey {
 
     @Serializable
     sealed interface HomeRoute : Route {
@@ -30,5 +34,14 @@ sealed interface Route {
 
         @Serializable
         data object Main : Ex3Route
+    }
+}
+
+val routeSerializersModule = SerializersModule {
+    polymorphic(NavKey::class) {
+        subclass(Route.HomeRoute.Main::class)
+        subclass(Route.Ex1Route.Main::class)
+        subclass(Route.Ex2Route.Main::class)
+        subclass(Route.Ex3Route.Main::class)
     }
 }

@@ -1,0 +1,12 @@
+package com.lwg.cooking.navigation
+
+import androidx.compose.runtime.compositionLocalOf
+
+interface MainAction {
+    fun showSnackBar(message: String)
+    fun finishApp()
+}
+
+val LocalMainAction = compositionLocalOf<MainAction> {
+    error("No MainAction provided")
+}

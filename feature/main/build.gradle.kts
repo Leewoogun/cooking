@@ -12,6 +12,10 @@ kotlin {
             implementation(projects.feature.ex2)
             implementation(projects.feature.ex3)
         }
+
+        androidMain.dependencies {
+            implementation(libs.androidx.activity.compose)
+        }
     }
 }
 

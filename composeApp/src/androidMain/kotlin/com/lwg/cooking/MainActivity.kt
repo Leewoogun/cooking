@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MainRoute()
+            MainRoute(onFinishApp = ::finish)
         }
     }
 }
