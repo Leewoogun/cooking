@@ -1,24 +1,34 @@
 package com.lwg.cooking.feature.home
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.lwg.cooking.feature.home.contract.HomeUiState
 
 @Composable
-fun HomeScreen(
-    modifier: Modifier = Modifier,
+internal fun HomeScreen(
+    uiState: HomeUiState.Data,
 ) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
     ) {
-        Text(
-            text = "Home",
-            style = MaterialTheme.typography.headlineMedium,
-        )
+        items(uiState.movieTitles) { title ->
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+            )
+            HorizontalDivider()
+        }
     }
 }

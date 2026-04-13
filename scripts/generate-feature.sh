@@ -77,14 +77,14 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 
 @Stable
-internal sealed interface ${UPPER_CAMEL_CASE_NAME}UiState {
+sealed interface ${UPPER_CAMEL_CASE_NAME}UiState {
 
     @Immutable
     data object Loading : ${UPPER_CAMEL_CASE_NAME}UiState
 
     @Immutable
     data class Data(
-        // TODO: Data를 정의해야 합니다.
+        val placeholder: Unit = Unit, // TODO: 실제 데이터 필드로 교체하세요.
     ) : ${UPPER_CAMEL_CASE_NAME}UiState
 }
 EOF
@@ -98,14 +98,14 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 
 @Stable
-internal sealed interface ${UPPER_CAMEL_CASE_NAME}ModalEffect {
+sealed interface ${UPPER_CAMEL_CASE_NAME}ModalEffect {
 
     @Immutable
     data object Hidden : ${UPPER_CAMEL_CASE_NAME}ModalEffect
 }
 
 @Stable
-internal sealed interface ${UPPER_CAMEL_CASE_NAME}UiEffect {
+sealed interface ${UPPER_CAMEL_CASE_NAME}UiEffect {
 
     @Immutable
     data class ShowMessage(val message: String) : ${UPPER_CAMEL_CASE_NAME}UiEffect
@@ -157,13 +157,13 @@ class ${UPPER_CAMEL_CASE_NAME}ViewModel(
 EOF
 echo "✓ ${UPPER_CAMEL_CASE_NAME}ViewModel.kt"
 
-# 6. Screen
-cat > "$SRC_DIR/${UPPER_CAMEL_CASE_NAME}Screen.kt" << EOF
+# 6. Route (state collect + event 전달) + Content (상태 분기)
+cat > "$SRC_DIR/${UPPER_CAMEL_CASE_NAME}Route.kt" << EOF
 package $BASE_PACKAGE.feature.$LOWER_FEATURE_NAME
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -173,7 +173,7 @@ import $BASE_PACKAGE.feature.$LOWER_FEATURE_NAME.contract.${UPPER_CAMEL_CASE_NAM
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ${UPPER_CAMEL_CASE_NAME}Screen(
+fun ${UPPER_CAMEL_CASE_NAME}Route(
     viewModel: ${UPPER_CAMEL_CASE_NAME}ViewModel = koinViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -187,25 +187,55 @@ fun ${UPPER_CAMEL_CASE_NAME}Screen(
 private fun ${UPPER_CAMEL_CASE_NAME}Content(
     uiState: ${UPPER_CAMEL_CASE_NAME}UiState,
 ) {
+    when (uiState) {
+        is ${UPPER_CAMEL_CASE_NAME}UiState.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+        is ${UPPER_CAMEL_CASE_NAME}UiState.Data -> {
+            ${UPPER_CAMEL_CASE_NAME}Screen(uiState = uiState)
+        }
+    }
+}
+EOF
+echo "✓ ${UPPER_CAMEL_CASE_NAME}Route.kt"
+
+# 7. Screen (실제 UI + Preview)
+cat > "$SRC_DIR/${UPPER_CAMEL_CASE_NAME}Screen.kt" << EOF
+package $BASE_PACKAGE.feature.$LOWER_FEATURE_NAME
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import $BASE_PACKAGE.feature.$LOWER_FEATURE_NAME.contract.${UPPER_CAMEL_CASE_NAME}UiState
+
+@Composable
+internal fun ${UPPER_CAMEL_CASE_NAME}Screen(
+    uiState: ${UPPER_CAMEL_CASE_NAME}UiState.Data,
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
-        when (uiState) {
-            is ${UPPER_CAMEL_CASE_NAME}UiState.Loading -> {
-                Text("Loading...")
-            }
-            is ${UPPER_CAMEL_CASE_NAME}UiState.Data -> {
-                // TODO: UI를 구현하세요.
-                Text("${UPPER_CAMEL_CASE_NAME}")
-            }
-        }
+        // TODO: UI를 구현하세요.
+        Text(
+            text = "${UPPER_CAMEL_CASE_NAME}",
+            style = MaterialTheme.typography.headlineMedium,
+        )
     }
 }
 EOF
 echo "✓ ${UPPER_CAMEL_CASE_NAME}Screen.kt"
 
-# 7. Koin Module
+# 8. Koin Module
 cat > "$SRC_DIR/di/${UPPER_CAMEL_CASE_NAME}Module.kt" << EOF
 package $BASE_PACKAGE.feature.$LOWER_FEATURE_NAME.di
 

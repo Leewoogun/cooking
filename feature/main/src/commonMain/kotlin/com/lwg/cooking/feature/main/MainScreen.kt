@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import com.lwg.cooking.designsystem.theme.CookingTheme
-import com.lwg.cooking.feature.ex1.Ex1Screen
-import com.lwg.cooking.feature.ex2.Ex2Screen
-import com.lwg.cooking.feature.ex3.Ex3Screen
-import com.lwg.cooking.feature.home.HomeScreen
+import com.lwg.cooking.feature.ex1.Ex1Route
+import com.lwg.cooking.feature.ex2.Ex2Route
+import com.lwg.cooking.feature.ex3.Ex3Route
+import com.lwg.cooking.feature.home.HomeRoute
 import com.lwg.cooking.feature.main.component.BottomNavItem
 import com.lwg.cooking.navigation.Route
 
@@ -51,10 +51,10 @@ private fun MainScreen() {
                     .padding(innerPadding),
                 entryProvider = { route ->
                     when (route) {
-                        is Route.HomeRoute -> NavEntry(route) { HomeScreen() }
-                        is Route.Ex1Route -> NavEntry(route) { Ex1Screen() }
-                        is Route.Ex2Route -> NavEntry(route) { Ex2Screen() }
-                        is Route.Ex3Route -> NavEntry(route) { Ex3Screen() }
+                        is Route.HomeRoute -> NavEntry(route) { HomeRoute() }
+                        is Route.Ex1Route -> NavEntry(route) { Ex1Route() }
+                        is Route.Ex2Route -> NavEntry(route) { Ex2Route() }
+                        is Route.Ex3Route -> NavEntry(route) { Ex3Route() }
                     }
                 },
             )

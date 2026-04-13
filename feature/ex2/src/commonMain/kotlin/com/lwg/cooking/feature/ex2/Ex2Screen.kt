@@ -7,15 +7,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.lwg.cooking.feature.ex2.contract.Ex2UiState
 
 @Composable
-fun Ex2Screen(
-    modifier: Modifier = Modifier,
+internal fun Ex2Screen(
+    uiState: Ex2UiState.Data,
 ) {
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
+        // TODO: UI를 구현하세요.
         Text(
             text = "Ex2",
             style = MaterialTheme.typography.headlineMedium,

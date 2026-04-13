@@ -1,6 +1,9 @@
 package com.lwg.cooking
 
 import com.lwg.cooking.di.AppModule
+import com.lwg.cooking.feature.ex1.di.Ex1Module
+import com.lwg.cooking.feature.ex2.di.Ex2Module
+import com.lwg.cooking.feature.ex3.di.Ex3Module
 import com.lwg.cooking.feature.home.di.HomeModule
 import org.koin.core.KoinApplication
 import org.koin.dsl.KoinAppDeclaration
@@ -12,6 +15,9 @@ internal fun cookingAppDeclaration(
     modules(
         AppModule().module,
         HomeModule().module,
+        Ex1Module().module,
+        Ex2Module().module,
+        Ex3Module().module,
     )
     additionalDeclaration()
 }
