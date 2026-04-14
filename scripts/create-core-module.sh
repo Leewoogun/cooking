@@ -28,7 +28,8 @@ if [[ "$MODULE_TYPE" != "android" && "$MODULE_TYPE" != "kotlin" ]]; then
     exit 1
 fi
 
-PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 MODULE_PATH="$PROJECT_ROOT/core/$MODULE_NAME"
 PACKAGE_PATH="com/lwg/base/$MODULE_NAME"
 
