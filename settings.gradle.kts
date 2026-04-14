@@ -45,6 +45,10 @@ include(":remote:mapper")
 // Data
 include(":data:repositoryImpl")
 
+// Local
+include(":local:datastore")
+include(":local:database")
+
 // Core
 include(":core:designsystem")
 include(":core:utils")

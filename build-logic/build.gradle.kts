@@ -12,6 +12,7 @@ dependencies {
     compileOnly(libs.compose.compiler.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.detekt.gradlePlugin)
+    implementation(libs.room.runtime)
 }
 
 gradlePlugin {
