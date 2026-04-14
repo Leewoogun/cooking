@@ -30,12 +30,27 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
+
+// Domain
+include(":domain:model")
+include(":domain:repository")
+include(":domain:usecase")
+
+// Remote
+include(":remote:network")
+include(":remote:api")
+include(":remote:model")
+include(":remote:mapper")
+
+// Data
+include(":data:repositoryImpl")
+
+// Core
 include(":core:designsystem")
-include(":core:domain")
-include(":core:network")
-include(":core:data")
 include(":core:utils")
 include(":core:navigation")
+
+// Feature
 include(":feature:main")
 include(":feature:home")
 include(":feature:ex1")

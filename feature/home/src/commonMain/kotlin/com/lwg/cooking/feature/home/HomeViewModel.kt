@@ -24,11 +24,11 @@ class HomeViewModel(
 
     val uiState: StateFlow<HomeUiState> = movieRepository.getTopRatedMovies(
         onError = ::showMessage,
-    ).map { titles ->
-        if (titles.isEmpty()) {
+    ).map { movies ->
+        if (movies.isEmpty()) {
             HomeUiState.Empty
         } else {
-            HomeUiState.Data(movieTitles = titles)
+            HomeUiState.Data(movies = movies)
         }
     }.stateIn(
         scope = viewModelScope,

@@ -2,6 +2,7 @@ package com.lwg.cooking.feature.home.contract
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import com.lwg.cooking.domain.model.Movie
 
 @Stable
 sealed interface HomeUiState {
@@ -14,8 +15,8 @@ sealed interface HomeUiState {
 
     @Immutable
     data class Data(
-        val movieTitles: List<String>,
+        val movies: List<Movie>,
     ) : HomeUiState {
-        val isEmpty: Boolean get() = movieTitles.isEmpty()
+        val isEmpty: Boolean get() = movies.isEmpty()
     }
 }

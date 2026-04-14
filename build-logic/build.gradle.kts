@@ -44,6 +44,10 @@ gradlePlugin {
             id = "cooking.compose.multiplatform"
             implementationClass = "com.lwg.cooking.convention.ComposeMultiPlatformConventionPlugin"
         }
+        register("kmpPureConvention") {
+            id = "cooking.kotlin.multiplatform.pure"
+            implementationClass = "com.lwg.cooking.convention.KotlinMultiPlatformPurePlugin"
+        }
         register("cookingFeature") {
             id = "cooking.feature"
             implementationClass = "com.lwg.cooking.convention.CookingFeaturePlugin"

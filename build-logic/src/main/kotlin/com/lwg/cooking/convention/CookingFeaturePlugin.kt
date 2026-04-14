@@ -24,7 +24,9 @@ class CookingFeaturePlugin : Plugin<Project> {
                     dependencies {
                         implementation(project(":core:designsystem"))
                         implementation(project(":core:navigation"))
-                        implementation(project(":core:domain"))
+                        implementation(project(":domain:model"))
+                        implementation(project(":domain:repository"))
+                        implementation(project(":domain:usecase"))
                         implementation(project(":core:utils"))
                         implementation(libs.library("androidx-navigation3-ui"))
                         implementation(libs.library("androidx-lifecycle-viewmodel-navigation3"))

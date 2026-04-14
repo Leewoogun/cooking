@@ -30,7 +30,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel.navigation)
             implementation(libs.koin.annotations)
 
-            implementation(projects.core.data)
+            implementation(projects.data.repositoryImpl)
 
             implementation(projects.feature.main)
             implementation(projects.feature.home)

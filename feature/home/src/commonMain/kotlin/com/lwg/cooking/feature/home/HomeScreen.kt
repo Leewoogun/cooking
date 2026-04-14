@@ -20,9 +20,9 @@ internal fun HomeScreen(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
     ) {
-        items(uiState.movieTitles) { title ->
+        items(uiState.movies) { movie ->
             Text(
-                text = title,
+                text = movie.title,
                 style = CookingTheme.typography.medium16,
                 modifier = Modifier
                     .fillMaxWidth()

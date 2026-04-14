@@ -165,6 +165,7 @@ cookingKmpAndroid = { id = "cooking.kmp.android" }
 cookingKmp = { id = "cooking.kmp" }
 cookingVerifyDetekt = { id = "cooking.verify.detekt" }
 cookingKotlinMultiplatform = { id = "cooking.kotlin.multiplatform" }
+cookingKotlinMultiplatformPure = { id = "cooking.kotlin.multiplatform.pure" }
 cookingComposeMultiplatform = { id = "cooking.compose.multiplatform" }
 cookingFeature = { id = "cooking.feature" }
 cookingKspKoin = { id = "cooking.ksp.koin" }
