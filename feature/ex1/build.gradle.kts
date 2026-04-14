@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.cookingFeature)
+    alias(libs.plugins.baseFeature)
 }
 
 android {
-    namespace = "com.lwg.cooking.feature.ex1"
+    namespace = "com.lwg.base.feature.ex1"
 }

@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.cookingKotlinMultiplatform)
-    alias(libs.plugins.cookingComposeMultiplatform)
+    alias(libs.plugins.baseKotlinMultiplatform)
+    alias(libs.plugins.baseComposeMultiplatform)
     alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
-    namespace = "com.lwg.cooking.navigation"
+    namespace = "com.lwg.base.navigation"
 }
 
 kotlin {

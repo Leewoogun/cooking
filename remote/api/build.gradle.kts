@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.cookingKotlinMultiplatform)
-    alias(libs.plugins.cookingKspKoin)
+    alias(libs.plugins.baseKotlinMultiplatform)
+    alias(libs.plugins.baseKspKoin)
     alias(libs.plugins.ktorfit)
 }
 
 android {
-    namespace = "com.lwg.cooking.remote.api"
+    namespace = "com.lwg.base.remote.api"
 }
 
 kotlin {

@@ -3,15 +3,15 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.cookingKotlinMultiplatform)
+    alias(libs.plugins.baseKotlinMultiplatform)
     alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.cookingKspKoin)
+    alias(libs.plugins.baseKspKoin)
     alias(libs.plugins.ktorfit)
     alias(libs.plugins.buildkonfig)
 }
 
 android {
-    namespace = "com.lwg.cooking.remote.network"
+    namespace = "com.lwg.base.remote.network"
 }
 
 val properties = Properties().apply {
@@ -19,7 +19,7 @@ val properties = Properties().apply {
 }
 
 buildkonfig {
-    packageName = "com.lwg.cooking.remote.network"
+    packageName = "com.lwg.base.remote.network"
 
     defaultConfigs {
         buildConfigField(STRING, "TMDB_TOKEN", properties["tmdb_token"].toString().trim('"'))

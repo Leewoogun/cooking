@@ -1,11 +1,11 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.cookingKotlinMultiplatform)
-    alias(libs.plugins.cookingKspKoin)
+    alias(libs.plugins.baseKotlinMultiplatform)
+    alias(libs.plugins.baseKspKoin)
 }
 
 android {
-    namespace = "com.lwg.cooking.data.repositoryimpl"
+    namespace = "com.lwg.base.data.repositoryimpl"
 }
 
 kotlin {

@@ -160,13 +160,13 @@ mokoResources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 
 # Custom Plugins
-cookingKmpIos = { id = "cooking.kmp.ios" }
-cookingKmpAndroid = { id = "cooking.kmp.android" }
-cookingKmp = { id = "cooking.kmp" }
-cookingVerifyDetekt = { id = "cooking.verify.detekt" }
-cookingKotlinMultiplatform = { id = "cooking.kotlin.multiplatform" }
-cookingKotlinMultiplatformPure = { id = "cooking.kotlin.multiplatform.pure" }
-cookingComposeMultiplatform = { id = "cooking.compose.multiplatform" }
-cookingFeature = { id = "cooking.feature" }
-cookingKspKoin = { id = "cooking.ksp.koin" }
+baseKmpIos = { id = "base.kmp.ios" }
+baseKmpAndroid = { id = "base.kmp.android" }
+baseKmp = { id = "base.kmp" }
+baseVerifyDetekt = { id = "base.verify.detekt" }
+baseKotlinMultiplatform = { id = "base.kotlin.multiplatform" }
+baseKotlinMultiplatformPure = { id = "base.kotlin.multiplatform.pure" }
+baseComposeMultiplatform = { id = "base.compose.multiplatform" }
+baseFeature = { id = "base.feature" }
+baseKspKoin = { id = "base.ksp.koin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

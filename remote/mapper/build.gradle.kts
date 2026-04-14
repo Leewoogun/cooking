@@ -1,10 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.cookingKotlinMultiplatform)
+    alias(libs.plugins.baseKotlinMultiplatform)
 }
 
 android {
-    namespace = "com.lwg.cooking.remote.mapper"
+    namespace = "com.lwg.base.remote.mapper"
 }
 
 kotlin {

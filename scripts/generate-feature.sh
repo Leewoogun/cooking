@@ -30,9 +30,9 @@ LOWER_FEATURE_NAME=$(to_lower "$RAW_NAME")
 UPPER_CAMEL_CASE_NAME=$(to_upper_first "$RAW_NAME")
 LOWER_CAMEL_CASE_NAME=$(to_lower_first "$RAW_NAME")
 
-BASE_PACKAGE="com.lwg.cooking"
+BASE_PACKAGE="com.lwg.base"
 FEATURE_MODULE_DIR="$PROJECT_ROOT/feature/$LOWER_FEATURE_NAME"
-SRC_DIR="$FEATURE_MODULE_DIR/src/commonMain/kotlin/com/lwg/cooking/feature/$LOWER_FEATURE_NAME"
+SRC_DIR="$FEATURE_MODULE_DIR/src/commonMain/kotlin/com/lwg/base/feature/$LOWER_FEATURE_NAME"
 
 echo "======================================="
 echo "  Feature Module Generator (KMP)"
@@ -55,7 +55,7 @@ mkdir -p "$SRC_DIR/di"
 # 1. build.gradle.kts
 cat > "$FEATURE_MODULE_DIR/build.gradle.kts" << EOF
 plugins {
-    alias(libs.plugins.cookingFeature)
+    alias(libs.plugins.baseFeature)
 }
 
 android {

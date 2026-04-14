@@ -30,7 +30,7 @@ fi
 
 PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
 MODULE_PATH="$PROJECT_ROOT/core/$MODULE_NAME"
-PACKAGE_PATH="com/lwg/cooking/$MODULE_NAME"
+PACKAGE_PATH="com/lwg/base/$MODULE_NAME"
 
 echo "📦 Core 모듈 생성 중: $MODULE_NAME (타입: $MODULE_TYPE)"
 
@@ -56,8 +56,8 @@ if [ "$MODULE_TYPE" = "android" ]; then
     cat > "$MODULE_PATH/build.gradle.kts" << 'EOF'
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.cookingKotlinMultiplatform)
-    alias(libs.plugins.cookingComposeMultiplatform)
+    alias(libs.plugins.baseKotlinMultiplatform)
+    alias(libs.plugins.baseComposeMultiplatform)
 }
 
 android {

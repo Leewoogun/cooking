@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.cookingFeature)
+    alias(libs.plugins.baseFeature)
 }
 
 kotlin {
@@ -20,5 +20,5 @@ kotlin {
 }
 
 android {
-    namespace = "com.lwg.cooking.feature.main"
+    namespace = "com.lwg.base.feature.main"
 }

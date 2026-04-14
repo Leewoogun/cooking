@@ -79,7 +79,7 @@ class SomeRepositoryImpl(
 
 // 모듈 정의 (각 feature/core 모듈별)
 @Module
-@ComponentScan("com.lwg.cooking.feature.home")
+@ComponentScan("com.lwg.base.feature.home")
 class HomeModule
 ```
 

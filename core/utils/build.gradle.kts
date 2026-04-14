@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.cookingKotlinMultiplatform)
-    alias(libs.plugins.cookingComposeMultiplatform)
+    alias(libs.plugins.baseKotlinMultiplatform)
+    alias(libs.plugins.baseComposeMultiplatform)
 }
 
 android {

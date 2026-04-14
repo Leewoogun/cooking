@@ -1,4 +1,4 @@
-rootProject.name = "Cooking"
+rootProject.name = "CmpSystem"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

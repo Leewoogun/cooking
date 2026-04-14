@@ -17,40 +17,40 @@ dependencies {
 gradlePlugin {
     plugins {
         register("kmpIos") {
-            id = "cooking.kmp.ios"
-            implementationClass = "com.lwg.cooking.primitive.KotlinMultiPlatformiOSPlugin"
+            id = "base.kmp.ios"
+            implementationClass = "com.lwg.base.primitive.KotlinMultiPlatformiOSPlugin"
         }
         register("kmpAndroid") {
-            id = "cooking.kmp.android"
-            implementationClass = "com.lwg.cooking.primitive.KotlinMultiPlatformAndroidPlugin"
+            id = "base.kmp.android"
+            implementationClass = "com.lwg.base.primitive.KotlinMultiPlatformAndroidPlugin"
         }
         register("kmpPrimitive") {
-            id = "cooking.kmp"
-            implementationClass = "com.lwg.cooking.primitive.KotlinMultiPlatformPlugin"
+            id = "base.kmp"
+            implementationClass = "com.lwg.base.primitive.KotlinMultiPlatformPlugin"
         }
         register("detekt") {
-            id = "cooking.verify.detekt"
-            implementationClass = "com.lwg.cooking.primitive.DetektPlugin"
+            id = "base.verify.detekt"
+            implementationClass = "com.lwg.base.primitive.DetektPlugin"
         }
         register("kspKoin") {
-            id = "cooking.ksp.koin"
-            implementationClass = "com.lwg.cooking.primitive.KspKoinPlugin"
+            id = "base.ksp.koin"
+            implementationClass = "com.lwg.base.primitive.KspKoinPlugin"
         }
         register("kmpConvention") {
-            id = "cooking.kotlin.multiplatform"
-            implementationClass = "com.lwg.cooking.convention.KotlinMultiPlatformConventionPlugin"
+            id = "base.kotlin.multiplatform"
+            implementationClass = "com.lwg.base.convention.KotlinMultiPlatformConventionPlugin"
         }
         register("cmpConvention") {
-            id = "cooking.compose.multiplatform"
-            implementationClass = "com.lwg.cooking.convention.ComposeMultiPlatformConventionPlugin"
+            id = "base.compose.multiplatform"
+            implementationClass = "com.lwg.base.convention.ComposeMultiPlatformConventionPlugin"
         }
         register("kmpPureConvention") {
-            id = "cooking.kotlin.multiplatform.pure"
-            implementationClass = "com.lwg.cooking.convention.KotlinMultiPlatformPurePlugin"
+            id = "base.kotlin.multiplatform.pure"
+            implementationClass = "com.lwg.base.convention.KotlinMultiPlatformPurePlugin"
         }
-        register("cookingFeature") {
-            id = "cooking.feature"
-            implementationClass = "com.lwg.cooking.convention.CookingFeaturePlugin"
+        register("baseFeature") {
+            id = "base.feature"
+            implementationClass = "com.lwg.base.convention.BaseFeaturePlugin"
         }
     }
 }

@@ -1,11 +1,11 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.cookingKotlinMultiplatform)
+    alias(libs.plugins.baseKotlinMultiplatform)
     alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
-    namespace = "com.lwg.cooking.remote.model"
+    namespace = "com.lwg.base.remote.model"
 }
 
 kotlin {

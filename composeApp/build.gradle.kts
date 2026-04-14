@@ -3,9 +3,9 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.cookingKotlinMultiplatform)
-    alias(libs.plugins.cookingComposeMultiplatform)
-    alias(libs.plugins.cookingKspKoin)
+    alias(libs.plugins.baseKotlinMultiplatform)
+    alias(libs.plugins.baseComposeMultiplatform)
+    alias(libs.plugins.baseKspKoin)
 }
 
 kotlin {
@@ -46,11 +46,11 @@ composeCompiler {
 }
 
 android {
-    namespace = "com.lwg.cooking"
+    namespace = "com.lwg.base"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.lwg.cooking"
+        applicationId = "com.lwg.base"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

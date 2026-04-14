@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.cookingKotlinMultiplatformPure)
+    alias(libs.plugins.baseKotlinMultiplatformPure)
 }
 
 kotlin {
