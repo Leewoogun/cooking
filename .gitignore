@@ -18,4 +18,4 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 *.preferences_pb
 
-.claude
+.claude/settings.local.json
