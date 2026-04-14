@@ -7,3 +7,11 @@ plugins {
 android {
     namespace = "com.lwg.designsystem"
 }
+
+kotlin {
+    sourceSets {
+        androidMain.dependencies {
+            implementation(libs.androidx.core.ktx)
+        }
+    }
+}
